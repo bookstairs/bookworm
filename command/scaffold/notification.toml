@@ -12,21 +12,3 @@
 [notification.log]
 # this is only for debugging purpose and does not work with "weed filer.replicate"
 enabled = false
-
-
-[notification.kafka]
-enabled = false
-hosts = [
-    "localhost:9092"
-]
-topic = "seaweedfs_filer"
-offsetFile = "./last.offset"
-offsetSaveIntervalSeconds = 10
-
-
-[notification.google_pub_sub]
-# read credentials doc at https://cloud.google.com/docs/authentication/getting-started
-enabled = false
-google_application_credentials = "/path/to/x.json" # path to json credential file
-project_id = ""                       # an existing project id
-topic = "seaweedfs_filer_topic"       # a topic, auto created if does not exists

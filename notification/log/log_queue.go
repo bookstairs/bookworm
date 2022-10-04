@@ -1,4 +1,4 @@
-package kafka
+package log
 
 import (
 	"github.com/golang/glog"
