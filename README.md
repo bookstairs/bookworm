@@ -11,11 +11,19 @@ Use the original SeaweedFS instead.
 
 ## Architecture Diagram
 
-TODO
+![](docs/SeaweedFS_Architecture.png)
 
-## Function Interfaces
+![](docs/SeaweedFS_Filer_Backup.png)
 
-TODO
+![](docs/SeaweedFS_Gateway_RemoteObjectStore.png)
+
+![](docs/SeaweedFS_RemoteMount.png)
+
+![](docs/SeaweedFS_XDR.png)
+
+## Thanks
+
+Thanks to [Chris Lu](https://github.com/chrislusf) and other SeaweedFS developers.
 
 ## License
 

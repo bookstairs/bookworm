@@ -1,0 +1,63 @@
+package shell
+
+import (
+	"fmt"
+	"io"
+
+	"github.com/bookstairs/bookworm/filer"
+	"github.com/bookstairs/bookworm/pb/filer_pb"
+	"github.com/bookstairs/bookworm/util"
+)
+
+func init() {
+	Commands = append(Commands, &commandFsCat{})
+}
+
+type commandFsCat struct {
+}
+
+func (c *commandFsCat) Name() string {
+	return "fs.cat"
+}
+
+func (c *commandFsCat) Help() string {
+	return `stream the file content on to the screen
+
+	fs.cat /dir/file_name
+`
+}
+
+func (c *commandFsCat) Do(args []string, commandEnv *CommandEnv, writer io.Writer) (err error) {
+
+	path, err := commandEnv.parseUrl(findInputDirectory(args))
+	if err != nil {
+		return err
+	}
+
+	if commandEnv.isDirectory(path) {
+		return fmt.Errorf("%s is a directory", path)
+	}
+
+	dir, name := util.FullPath(path).DirAndName()
+
+	return commandEnv.WithFilerClient(false, func(client filer_pb.SeaweedFilerClient) error {
+
+		request := &filer_pb.LookupDirectoryEntryRequest{
+			Name:      name,
+			Directory: dir,
+		}
+		respLookupEntry, err := filer_pb.LookupEntry(client, request)
+		if err != nil {
+			return err
+		}
+
+		if len(respLookupEntry.Entry.Content) > 0 {
+			_, err = writer.Write(respLookupEntry.Entry.Content)
+			return err
+		}
+
+		return filer.StreamContent(commandEnv.MasterClient, writer, respLookupEntry.Entry.Chunks, 0, int64(filer.FileSize(respLookupEntry.Entry)))
+
+	})
+
+}
