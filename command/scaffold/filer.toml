@@ -135,11 +135,6 @@ connection_max_lifetime_seconds = 0
 enableUpsert = true
 upsertQuery = """INSERT INTO "%[1]s" (dirhash,name,directory,meta) VALUES($1,$2,$3,$4) ON CONFLICT (dirhash,name) DO UPDATE SET meta = EXCLUDED.meta WHERE "%[1]s".meta != EXCLUDED.meta"""
 
-[hbase]
-enabled = false
-zkquorum = ""
-table = "seaweedfs"
-
 [redis2]
 enabled = false
 address = "localhost:6379"
