@@ -3,7 +3,6 @@ package command
 import (
 	_ "net/http/pprof"
 
-	_ "github.com/bookstairs/bookworm/filer/etcd"
 	_ "github.com/bookstairs/bookworm/filer/hbase"
 	_ "github.com/bookstairs/bookworm/filer/leveldb"
 	_ "github.com/bookstairs/bookworm/filer/leveldb2"
