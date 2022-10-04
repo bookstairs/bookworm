@@ -25,11 +25,9 @@ import (
 var (
 	f                  FilerOptions
 	filerStartS3       *bool
-	filerS3Options     S3Options
 	filerStartWebDav   *bool
 	filerWebDavOptions WebDavOption
 	filerStartIam      *bool
-	filerIamOptions    IamOptions
 )
 
 type FilerOptions struct {
@@ -90,19 +88,6 @@ func init() {
 	f.showUIDirectoryDelete = cmdFiler.Flag.Bool("ui.deleteDir", true, "enable filer UI show delete directory button")
 	f.downloadMaxMBps = cmdFiler.Flag.Int("downloadMaxMBps", 0, "download max speed for each download request, in MB per second")
 
-	// start s3 on filer
-	filerStartS3 = cmdFiler.Flag.Bool("s3", false, "whether to start S3 gateway")
-	filerS3Options.port = cmdFiler.Flag.Int("s3.port", 8333, "s3 server http listen port")
-	filerS3Options.portGrpc = cmdFiler.Flag.Int("s3.port.grpc", 0, "s3 server grpc listen port")
-	filerS3Options.domainName = cmdFiler.Flag.String("s3.domainName", "", "suffix of the host name in comma separated list, {bucket}.{domainName}")
-	filerS3Options.dataCenter = cmdFiler.Flag.String("s3.dataCenter", "", "prefer to read and write to volumes in this data center")
-	filerS3Options.tlsPrivateKey = cmdFiler.Flag.String("s3.key.file", "", "path to the TLS private key file")
-	filerS3Options.tlsCertificate = cmdFiler.Flag.String("s3.cert.file", "", "path to the TLS certificate file")
-	filerS3Options.config = cmdFiler.Flag.String("s3.config", "", "path to the config file")
-	filerS3Options.auditLogConfig = cmdFiler.Flag.String("s3.auditLogConfig", "", "path to the audit log config file")
-	filerS3Options.allowEmptyFolder = cmdFiler.Flag.Bool("s3.allowEmptyFolder", true, "allow empty folders")
-	filerS3Options.allowDeleteBucketNotEmpty = cmdFiler.Flag.Bool("s3.allowDeleteBucketNotEmpty", true, "allow recursive deleting all entries along with bucket")
-
 	// start webdav on filer
 	filerStartWebDav = cmdFiler.Flag.Bool("webdav", false, "whether to start webdav gateway")
 	filerWebDavOptions.port = cmdFiler.Flag.Int("webdav.port", 7333, "webdav server http listen port")
@@ -113,11 +98,6 @@ func init() {
 	filerWebDavOptions.tlsCertificate = cmdFiler.Flag.String("webdav.cert.file", "", "path to the TLS certificate file")
 	filerWebDavOptions.cacheDir = cmdFiler.Flag.String("webdav.cacheDir", os.TempDir(), "local cache directory for file chunks")
 	filerWebDavOptions.cacheSizeMB = cmdFiler.Flag.Int64("webdav.cacheCapacityMB", 0, "local cache capacity in MB")
-
-	// start iam on filer
-	filerStartIam = cmdFiler.Flag.Bool("iam", false, "whether to start IAM service")
-	filerIamOptions.ip = cmdFiler.Flag.String("iam.ip", *f.ip, "iam server http listen ip address")
-	filerIamOptions.port = cmdFiler.Flag.Int("iam.port", 8111, "iam server http listen port")
 }
 
 func filerLongDesc() string {
@@ -166,19 +146,6 @@ func runFiler(cmd *Command, args []string) bool {
 
 	filerAddress := util.JoinHostPort(*f.ip, *f.port)
 	startDelay := time.Duration(2)
-	if *filerStartS3 {
-		filerS3Options.filer = &filerAddress
-		filerS3Options.bindIp = f.bindIp
-		filerS3Options.localFilerSocket = f.localSocket
-		if *f.dataCenter != "" && *filerS3Options.dataCenter == "" {
-			filerS3Options.dataCenter = f.dataCenter
-		}
-		go func(delay time.Duration) {
-			time.Sleep(delay * time.Second)
-			filerS3Options.startS3Server()
-		}(startDelay)
-		startDelay++
-	}
 
 	if *filerStartWebDav {
 		filerWebDavOptions.filer = &filerAddress
@@ -187,15 +154,6 @@ func runFiler(cmd *Command, args []string) bool {
 			filerWebDavOptions.startWebDav()
 		}(startDelay)
 		startDelay++
-	}
-
-	if *filerStartIam {
-		filerIamOptions.filer = &filerAddress
-		filerIamOptions.masters = f.mastersString
-		go func(delay time.Duration) {
-			time.Sleep(delay * time.Second)
-			filerIamOptions.startIamServer()
-		}(startDelay)
 	}
 
 	f.masters = pb.ServerAddresses(*f.mastersString).ToAddressMap()

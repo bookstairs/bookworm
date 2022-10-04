@@ -27,8 +27,6 @@ var (
 	serverOptions ServerOptions
 	masterOptions MasterOptions
 	filerOptions  FilerOptions
-	s3Options     S3Options
-	iamOptions    IamOptions
 	webdavOptions WebDavOption
 )
 
@@ -134,18 +132,6 @@ func init() {
 	serverOptions.v.hasSlowRead = cmdServer.Flag.Bool("volume.hasSlowRead", false, "<experimental> if true, this prevents slow reads from blocking other requests, but large file read P99 latency will increase.")
 	serverOptions.v.readBufferSizeMB = cmdServer.Flag.Int("volume.readBufferSizeMB", 4, "<experimental> larger values can optimize query performance but will increase some memory usage,Use with hasSlowRead normally")
 
-	s3Options.port = cmdServer.Flag.Int("s3.port", 8333, "s3 server http listen port")
-	s3Options.portGrpc = cmdServer.Flag.Int("s3.port.grpc", 0, "s3 server grpc listen port")
-	s3Options.domainName = cmdServer.Flag.String("s3.domainName", "", "suffix of the host name in comma separated list, {bucket}.{domainName}")
-	s3Options.tlsPrivateKey = cmdServer.Flag.String("s3.key.file", "", "path to the TLS private key file")
-	s3Options.tlsCertificate = cmdServer.Flag.String("s3.cert.file", "", "path to the TLS certificate file")
-	s3Options.config = cmdServer.Flag.String("s3.config", "", "path to the config file")
-	s3Options.auditLogConfig = cmdServer.Flag.String("s3.auditLogConfig", "", "path to the audit log config file")
-	s3Options.allowEmptyFolder = cmdServer.Flag.Bool("s3.allowEmptyFolder", true, "allow empty folders")
-	s3Options.allowDeleteBucketNotEmpty = cmdServer.Flag.Bool("s3.allowDeleteBucketNotEmpty", true, "allow recursive deleting all entries along with bucket")
-
-	iamOptions.port = cmdServer.Flag.Int("iam.port", 8111, "iam server http listen port")
-
 	webdavOptions.port = cmdServer.Flag.Int("webdav.port", 7333, "webdav server http listen port")
 	webdavOptions.collection = cmdServer.Flag.String("webdav.collection", "", "collection to create the files")
 	webdavOptions.replication = cmdServer.Flag.String("webdav.replication", "", "replication to create the files")
@@ -196,9 +182,6 @@ func runServer(cmd *Command, args []string) bool {
 	filerOptions.masters = pb.ServerAddresses(*masterOptions.peers).ToAddressMap()
 	filerOptions.ip = serverIp
 	filerOptions.bindIp = serverBindIp
-	s3Options.bindIp = serverBindIp
-	iamOptions.ip = serverBindIp
-	iamOptions.masters = masterOptions.peers
 	serverOptions.v.ip = serverIp
 	serverOptions.v.bindIp = serverBindIp
 	serverOptions.v.masters = pb.ServerAddresses(*masterOptions.peers).ToAddresses()
@@ -213,13 +196,10 @@ func runServer(cmd *Command, args []string) bool {
 
 	filerOptions.dataCenter = serverDataCenter
 	filerOptions.rack = serverRack
-	s3Options.dataCenter = serverDataCenter
 	filerOptions.disableHttp = serverDisableHttp
 	masterOptions.disableHttp = serverDisableHttp
 
 	filerAddress := string(pb.NewServerAddress(*serverIp, *filerOptions.port, *filerOptions.portGrpc))
-	s3Options.filer = &filerAddress
-	iamOptions.filer = &filerAddress
 	webdavOptions.filer = &filerAddress
 
 	go stats_collect.StartMetricsServer(*serverMetricsHttpPort)
@@ -247,26 +227,10 @@ func runServer(cmd *Command, args []string) bool {
 		}()
 	}
 
-	if *isStartingS3 {
-		go func() {
-			time.Sleep(2 * time.Second)
-			s3Options.localFilerSocket = filerOptions.localSocket
-			s3Options.startS3Server()
-		}()
-	}
-
-	if *isStartingIam {
-		go func() {
-			time.Sleep(2 * time.Second)
-			iamOptions.startIamServer()
-		}()
-	}
-
 	if *isStartingWebDav {
 		go func() {
 			time.Sleep(2 * time.Second)
 			webdavOptions.startWebDav()
-
 		}()
 	}
 

@@ -13,7 +13,6 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a
 	github.com/facebookgo/stats v0.0.0-20151006221625-1b76add642e4
-	github.com/fluent/fluent-logger-golang v1.9.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang/glog v1.0.0
 	github.com/golang/protobuf v1.5.2
@@ -24,14 +23,12 @@ require (
 	github.com/hanwen/go-fuse/v2 v2.1.1-0.20220627082937-d01fda7edf17
 	github.com/hashicorp/raft v1.3.10
 	github.com/hashicorp/raft-boltdb/v2 v2.2.2
-	github.com/jinzhu/copier v0.3.5
 	github.com/karlseguin/ccache/v2 v2.0.8
 	github.com/klauspost/reedsolomon v1.11.1
 	github.com/kurin/blazer v0.5.3
 	github.com/linxGnu/grocksdb v1.7.7
 	github.com/peterh/liner v1.2.2
 	github.com/posener/complete v1.2.3
-	github.com/pquerna/cachecontrol v0.1.0
 	github.com/prometheus/client_golang v1.13.0
 	github.com/prometheus/procfs v0.8.0
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
@@ -53,7 +50,6 @@ require (
 	google.golang.org/grpc v1.49.0
 	google.golang.org/grpc/security/advancedtls v0.0.0-20221004221323-12db695f1648
 	google.golang.org/protobuf v1.28.1
-	modernc.org/strutil v1.1.3
 )
 
 require (
@@ -63,7 +59,6 @@ require (
 	github.com/Azure/go-autorest/autorest/adal v0.9.21 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/boltdb/bolt v1.3.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/d4l3k/messagediff v1.2.1 // indirect
@@ -103,12 +98,10 @@ require (
 	github.com/onsi/gomega v1.20.0 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.5 // indirect
-	github.com/philhofer/fwd v1.1.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
-	github.com/remyoudompheng/bigfft v0.0.0-20220927061507-ef77025ab5aa // indirect
 	github.com/rivo/uniseg v0.4.2 // indirect
 	github.com/spf13/afero v1.9.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
@@ -116,7 +109,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.4.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
-	github.com/tinylib/msgp v1.1.6 // indirect
 	github.com/viant/assertly v0.5.4 // indirect
 	github.com/viant/toolbox v0.34.5 // indirect
 	go.etcd.io/bbolt v1.3.6 // indirect
