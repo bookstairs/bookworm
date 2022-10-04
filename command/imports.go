@@ -6,7 +6,6 @@ import (
 	_ "github.com/bookstairs/bookworm/filer/leveldb"
 	_ "github.com/bookstairs/bookworm/filer/leveldb2"
 	_ "github.com/bookstairs/bookworm/filer/leveldb3"
-	_ "github.com/bookstairs/bookworm/filer/tikv"
 	_ "github.com/bookstairs/bookworm/filer/ydb"
 	_ "github.com/bookstairs/bookworm/remote_storage/azure"
 	_ "github.com/bookstairs/bookworm/remote_storage/gcs"
