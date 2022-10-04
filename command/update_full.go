@@ -1,5 +1,5 @@
-//go:build elastic && ydb && gocdk && tikv
-// +build elastic,ydb,gocdk,tikv
+//go:build ydb && gocdk && tikv
+// +build ydb,gocdk,tikv
 
 package command
 
