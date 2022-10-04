@@ -9,7 +9,6 @@ require (
 	github.com/Azure/azure-storage-blob-go v0.15.0
 	github.com/Jille/raft-grpc-transport v1.2.0
 	github.com/Shopify/sarama v1.37.1
-	github.com/arangodb/go-driver v1.4.0
 	github.com/aws/aws-sdk-go v1.44.110
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/disintegration/imaging v1.6.2
@@ -82,7 +81,6 @@ require (
 	cloud.google.com/go v0.104.0 // indirect
 	cloud.google.com/go/compute v1.10.0 // indirect
 	cloud.google.com/go/iam v0.5.0 // indirect
-	github.com/arangodb/go-velocypack v0.0.0-20200318135517-5af53c29c67e // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.16.16 // indirect
 	github.com/aws/aws-sdk-go-v2/config v1.17.8 // indirect
