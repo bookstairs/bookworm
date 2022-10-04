@@ -12,7 +12,6 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/bookstairs/bookworm/filer"
-	_ "github.com/bookstairs/bookworm/filer/cassandra"
 	_ "github.com/bookstairs/bookworm/filer/elastic/v7"
 	_ "github.com/bookstairs/bookworm/filer/etcd"
 	_ "github.com/bookstairs/bookworm/filer/hbase"

@@ -135,27 +135,6 @@ connection_max_lifetime_seconds = 0
 enableUpsert = true
 upsertQuery = """INSERT INTO "%[1]s" (dirhash,name,directory,meta) VALUES($1,$2,$3,$4) ON CONFLICT (dirhash,name) DO UPDATE SET meta = EXCLUDED.meta WHERE "%[1]s".meta != EXCLUDED.meta"""
 
-[cassandra]
-# CREATE TABLE filemeta (
-#    directory varchar,
-#    name varchar,
-#    meta blob,
-#    PRIMARY KEY (directory, name)
-# ) WITH CLUSTERING ORDER BY (name ASC);
-enabled = false
-keyspace = "seaweedfs"
-hosts = [
-    "localhost:9042",
-]
-username = ""
-password = ""
-# This changes the data layout. Only add new directories. Removing/Updating will cause data loss.
-superLargeDirectories = []
-# Name of the datacenter local to this filer, used as host selection fallback.
-localDC = ""
-# Gocql connection timeout, default: 600ms
-connection_timeout_millisecond = 600
-
 [hbase]
 enabled = false
 zkquorum = ""
@@ -303,7 +282,7 @@ dialTimeOut = 10
 ##########################
 # To add path-specific filer store:
 #
-# 1. Add a name following the store type separated by a dot ".". E.g., cassandra.tmp
+# 1. Add a name following the store type separated by a dot ".". E.g., redis2.tmp
 # 2. Add a location configuration. E.g., location = "/tmp/"
 # 3. Copy and customize all other configurations.
 #     Make sure they are not the same if using the same store type!
