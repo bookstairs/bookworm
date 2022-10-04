@@ -24,7 +24,6 @@ func (k *LogQueue) Initialize(configuration util.Configuration, prefix string) (
 }
 
 func (k *LogQueue) SendMessage(key string, message proto.Message) (err error) {
-
 	glog.V(0).Infof("%v: %+v", key, message)
 	return nil
 }
