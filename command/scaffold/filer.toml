@@ -233,12 +233,6 @@ readOnly = false
 # automatically use the closest Redis server for reads
 routeByLatency = false
 
-[mongodb]
-enabled = false
-uri = "mongodb://localhost:27017"
-option_pool_size = 0
-database = "seaweedfs"
-
 [ydb] # https://ydb.tech/
 enabled = false
 dsn = "grpc://localhost:2136?database=/local"

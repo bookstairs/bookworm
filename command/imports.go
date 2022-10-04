@@ -6,7 +6,6 @@ import (
 	_ "github.com/bookstairs/bookworm/filer/leveldb"
 	_ "github.com/bookstairs/bookworm/filer/leveldb2"
 	_ "github.com/bookstairs/bookworm/filer/leveldb3"
-	_ "github.com/bookstairs/bookworm/filer/mongodb"
 	_ "github.com/bookstairs/bookworm/filer/mysql"
 	_ "github.com/bookstairs/bookworm/filer/mysql2"
 	_ "github.com/bookstairs/bookworm/filer/postgres"
