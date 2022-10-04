@@ -6,7 +6,7 @@ has been provided. We have to self maintain this project to provide the function
 [BookStairs](https://github.com/bookstairs/bookstairs) may need. This project will be bundled into the final bookstairs
 distributions.
 
-Since we don't promise the backward compatible, we sincerely are you that **DO NOT USE THIS PROJECT IN YOUR CODE.**
+Since we don't promise the backward compatible, we sincerely ask you that **DO NOT USE THIS CODE IN YOUR PROJECT.**
 Use the original SeaweedFS instead.
 
 ## Architecture Diagram

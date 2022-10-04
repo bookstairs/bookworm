@@ -3,8 +3,6 @@ syntax = "proto3";
 package remote_pb;
 
 option go_package = "github.com/bookstairs/bookworm/pb/remote_pb";
-option java_package = "seaweedfs.client";
-option java_outer_classname = "FilerProto";
 
 /////////////////////////
 // Remote Storage related

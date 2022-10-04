@@ -3,8 +3,6 @@ syntax = "proto3";
 package messaging_pb;
 
 option go_package = "github.com/bookstairs/bookworm/pb/mq_pb";
-option java_package = "seaweedfs.mq";
-option java_outer_classname = "MessagQueueProto";
 
 //////////////////////////////////////////////////
 
