@@ -15,7 +15,6 @@ import (
 	_ "github.com/bookstairs/bookworm/filer/leveldb"
 	_ "github.com/bookstairs/bookworm/filer/leveldb2"
 	_ "github.com/bookstairs/bookworm/filer/leveldb3"
-	_ "github.com/bookstairs/bookworm/filer/ydb"
 	"github.com/bookstairs/bookworm/notification"
 	_ "github.com/bookstairs/bookworm/notification/log"
 	"github.com/bookstairs/bookworm/operation"
