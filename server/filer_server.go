@@ -27,8 +27,6 @@ import (
 	_ "github.com/bookstairs/bookworm/filer/sqlite"
 	_ "github.com/bookstairs/bookworm/filer/ydb"
 	"github.com/bookstairs/bookworm/notification"
-	_ "github.com/bookstairs/bookworm/notification/aws_sqs"
-	_ "github.com/bookstairs/bookworm/notification/gocdk_pub_sub"
 	_ "github.com/bookstairs/bookworm/notification/google_pub_sub"
 	_ "github.com/bookstairs/bookworm/notification/kafka"
 	_ "github.com/bookstairs/bookworm/notification/log"
