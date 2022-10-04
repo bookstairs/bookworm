@@ -15,8 +15,6 @@ import (
 	_ "github.com/bookstairs/bookworm/filer/leveldb"
 	_ "github.com/bookstairs/bookworm/filer/leveldb2"
 	_ "github.com/bookstairs/bookworm/filer/leveldb3"
-	_ "github.com/bookstairs/bookworm/filer/postgres"
-	_ "github.com/bookstairs/bookworm/filer/postgres2"
 	_ "github.com/bookstairs/bookworm/filer/redis"
 	_ "github.com/bookstairs/bookworm/filer/redis2"
 	_ "github.com/bookstairs/bookworm/filer/redis3"

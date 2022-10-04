@@ -30,7 +30,6 @@ require (
 	github.com/karlseguin/ccache/v2 v2.0.8
 	github.com/klauspost/reedsolomon v1.11.1
 	github.com/kurin/blazer v0.5.3
-	github.com/lib/pq v1.10.7
 	github.com/linxGnu/grocksdb v1.7.7
 	github.com/peterh/liner v1.2.2
 	github.com/posener/complete v1.2.3

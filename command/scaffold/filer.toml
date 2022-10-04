@@ -35,54 +35,6 @@ dir = "./filerldb3"                    # directory to store level db files
 enabled = false
 dir = "./filerrdb"                    # directory to store rocksdb files
 
-[postgres] # or cockroachdb, YugabyteDB
-# CREATE TABLE IF NOT EXISTS filemeta (
-#   dirhash     BIGINT,
-#   name        VARCHAR(65535),
-#   directory   VARCHAR(65535),
-#   meta        bytea,
-#   PRIMARY KEY (dirhash, name)
-# );
-enabled = false
-hostname = "localhost"
-port = 5432
-username = "postgres"
-password = ""
-database = "postgres"          # create or use an existing database
-schema = ""
-sslmode = "disable"
-connection_max_idle = 100
-connection_max_open = 100
-connection_max_lifetime_seconds = 0
-# if insert/upsert failing, you can disable upsert or update query syntax to match your RDBMS syntax:
-enableUpsert = true
-upsertQuery = """INSERT INTO "%[1]s" (dirhash,name,directory,meta) VALUES($1,$2,$3,$4) ON CONFLICT (dirhash,name) DO UPDATE SET meta = EXCLUDED.meta WHERE "%[1]s".meta != EXCLUDED.meta"""
-
-[postgres2]
-enabled = false
-createTable = """
-  CREATE TABLE IF NOT EXISTS "%s" (
-    dirhash   BIGINT,
-    name      VARCHAR(65535),
-    directory VARCHAR(65535),
-    meta      bytea,
-    PRIMARY KEY (dirhash, name)
-  );
-"""
-hostname = "localhost"
-port = 5432
-username = "postgres"
-password = ""
-database = "postgres"          # create or use an existing database
-schema = ""
-sslmode = "disable"
-connection_max_idle = 100
-connection_max_open = 100
-connection_max_lifetime_seconds = 0
-# if insert/upsert failing, you can disable upsert or update query syntax to match your RDBMS syntax:
-enableUpsert = true
-upsertQuery = """INSERT INTO "%[1]s" (dirhash,name,directory,meta) VALUES($1,$2,$3,$4) ON CONFLICT (dirhash,name) DO UPDATE SET meta = EXCLUDED.meta WHERE "%[1]s".meta != EXCLUDED.meta"""
-
 [redis2]
 enabled = false
 address = "localhost:6379"
