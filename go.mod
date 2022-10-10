@@ -21,7 +21,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/mux v1.8.0
 	github.com/hanwen/go-fuse/v2 v2.1.1-0.20220627082937-d01fda7edf17
-	github.com/hashicorp/raft v1.3.10
+	github.com/hashicorp/raft v1.3.11
 	github.com/hashicorp/raft-boltdb/v2 v2.2.2
 	github.com/karlseguin/ccache/v2 v2.0.8
 	github.com/klauspost/reedsolomon v1.11.1
